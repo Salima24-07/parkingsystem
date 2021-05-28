@@ -18,7 +18,7 @@ public class TicketDAO {
     private static final Logger logger = LogManager.getLogger("TicketDAO");
 
     public DataBaseConfig dataBaseConfig = new DataBaseConfig();
-
+    
     public boolean saveTicket(Ticket ticket){
         Connection con = null;
         try {
@@ -86,4 +86,28 @@ public class TicketDAO {
         }
         return false;
     }
+    public int getNumberOccurence(String vehicleRegNumber) {
+        Connection con = null;
+        int number_occurence  = 0;
+        try {
+            con = dataBaseConfig.getConnection();
+            PreparedStatement ps = con.prepareStatement(DBConstants.GET_NUMBER_OCCURRENCE);
+            //ID, PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME)
+            ps.setString(1,vehicleRegNumber);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+               number_occurence = rs.getInt(1);
+               System.out.println("DAO"+number_occurence);
+            }
+            dataBaseConfig.closeResultSet(rs);
+            dataBaseConfig.closePreparedStatement(ps);
+        }catch (Exception ex){
+            logger.error("Error fetching next available slot",ex);
+        }finally {
+            dataBaseConfig.closeConnection(con);
+            
+            return number_occurence;
+        }
+    }
+
 }
