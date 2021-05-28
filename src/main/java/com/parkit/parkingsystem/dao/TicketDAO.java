@@ -97,7 +97,6 @@ public class TicketDAO {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                number_occurence = rs.getInt(1);
-               System.out.println("DAO"+number_occurence);
             }
             dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);

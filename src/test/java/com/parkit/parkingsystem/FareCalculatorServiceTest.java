@@ -27,7 +27,7 @@ public class FareCalculatorServiceTest {
     private static void setUp() {
     	TicketDAO ticketDao = new TicketDAO();
     	ticketDao.dataBaseConfig = new DataBaseTestConfig();
-        fareCalculatorService = new FareCalculatorService();
+        fareCalculatorService = new FareCalculatorService(ticketDao);
         Connection con = null;
         try {
             con = ticketDao.dataBaseConfig.getConnection();
