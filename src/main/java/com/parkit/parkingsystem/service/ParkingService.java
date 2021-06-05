@@ -42,7 +42,7 @@ public class ParkingService {
                 ticket.setParkingSpot(parkingSpot);
                 ticket.setVehicleRegNumber(vehicleRegNumber);
                 ticket.setPrice(0);
-                ticket.setInTime(inTime);
+                ticket.setInTime(inTime.getTime());
                 ticket.setOutTime(null);
                 ticketDAO.saveTicket(ticket);
                 System.out.println("Generated Ticket and saved in DB");
@@ -102,7 +102,7 @@ public class ParkingService {
             String vehicleRegNumber = getVehichleRegNumber();
             Ticket ticket = ticketDAO.getTicket(vehicleRegNumber);
             Date outTime = new Date();
-            ticket.setOutTime(outTime);
+            ticket.setOutTime(outTime.getTime());
             fareCalculatorService.calculateFare(ticket);
             if(ticketDAO.updateTicket(ticket)) {
                 ParkingSpot parkingSpot = ticket.getParkingSpot();

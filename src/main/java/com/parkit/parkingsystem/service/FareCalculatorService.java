@@ -14,12 +14,12 @@ public class FareCalculatorService {
     public FareCalculatorService() {
 	}
 	public void calculateFare(Ticket ticket){
-        if( (ticket.getOutTime() == null) || (ticket.getOutTime().before(ticket.getInTime())) ){
+        if( (ticket.getOutTime() == null) || (ticket.getOutTime() < ticket.getInTime()) ){
             throw new IllegalArgumentException("Out time provided is incorrect:"+ticket.getOutTime().toString());
         }
 
-        double inHour = (double)ticket.getInTime().getTime() / 3600000;
-        double outHour = (double)ticket.getOutTime().getTime() / 3600000;
+        double inHour = (double)ticket.getInTime() / 3600000;
+        double outHour = (double)ticket.getOutTime() / 3600000;
        
         //DONE: Some tests are failing here. Need to check if this logic is correct
         double duration = outHour - inHour;

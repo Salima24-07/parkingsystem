@@ -18,6 +18,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.util.Date;
+
 public class FareCalculatorServiceTest {
 
     private static FareCalculatorService fareCalculatorService;
@@ -50,8 +51,8 @@ public class FareCalculatorServiceTest {
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
 
-        ticket.setInTime(inTime);
-        ticket.setOutTime(outTime);
+        ticket.setInTime(inTime.getTime());
+        ticket.setOutTime(outTime.getTime());
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket);
         assertEquals(0, ticket.getPrice());
@@ -64,8 +65,8 @@ public class FareCalculatorServiceTest {
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.BIKE,false);
 
-        ticket.setInTime(inTime);
-        ticket.setOutTime(outTime);
+        ticket.setInTime(inTime.getTime());
+        ticket.setOutTime(outTime.getTime());
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket);
         assertEquals(0, ticket.getPrice());
@@ -78,8 +79,8 @@ public class FareCalculatorServiceTest {
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, null,false);
 
-        ticket.setInTime(inTime);
-        ticket.setOutTime(outTime);
+        ticket.setInTime(inTime.getTime());
+        ticket.setOutTime(outTime.getTime());
         ticket.setParkingSpot(parkingSpot);
         assertThrows(NullPointerException.class, () -> fareCalculatorService.calculateFare(ticket));
     }
@@ -91,8 +92,8 @@ public class FareCalculatorServiceTest {
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.BIKE,false);
 
-        ticket.setInTime(inTime);
-        ticket.setOutTime(outTime);
+        ticket.setInTime(inTime.getTime());
+        ticket.setOutTime(outTime.getTime());
         ticket.setParkingSpot(parkingSpot);
         assertThrows(IllegalArgumentException.class, () -> fareCalculatorService.calculateFare(ticket));
     }
@@ -104,8 +105,8 @@ public class FareCalculatorServiceTest {
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
 
-        ticket.setInTime(inTime);
-        ticket.setOutTime(outTime);
+        ticket.setInTime(inTime.getTime());
+        ticket.setOutTime(outTime.getTime());
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket);
         assertEquals( (0.25 * Fare.CAR_RATE_PER_HOUR) , ticket.getPrice());
@@ -118,8 +119,8 @@ public class FareCalculatorServiceTest {
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.BIKE,false);
 
-        ticket.setInTime(inTime);
-        ticket.setOutTime(outTime);
+        ticket.setInTime(inTime.getTime());
+        ticket.setOutTime(outTime.getTime());
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket);
         assertEquals((0.25 * Fare.BIKE_RATE_PER_HOUR), ticket.getPrice() ); // 0.25 : 3/4 - 1/2(moins une demi heure)
@@ -132,8 +133,8 @@ public class FareCalculatorServiceTest {
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
 
-        ticket.setInTime(inTime);
-        ticket.setOutTime(outTime);
+        ticket.setInTime(inTime.getTime());
+        ticket.setOutTime(outTime.getTime());
         ticket.setVehicleRegNumber("206");
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket);
@@ -146,8 +147,8 @@ public class FareCalculatorServiceTest {
         Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.BIKE,false);
 
-        ticket.setInTime(inTime);
-        ticket.setOutTime(outTime);
+        ticket.setInTime(inTime.getTime());
+        ticket.setOutTime(outTime.getTime());
         ticket.setVehicleRegNumber("206");
         ticket.setParkingSpot(parkingSpot);
         fareCalculatorService.calculateFare(ticket);

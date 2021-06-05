@@ -3,6 +3,8 @@ package com.parkit.parkingsystem.config;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.parkit.parkingsystem.constants.DBConstants;
+
 import java.sql.*;
 
 public class DataBaseConfig {
@@ -13,7 +15,7 @@ public class DataBaseConfig {
         logger.info("Create DB connection");
         //Class.forName("com.mysql.jdbc.Driver");
         return DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/prod?serverTimezone=UTC","root","rootroot");
+                "jdbc:mysql://localhost:3306/prod?serverTimezone=UTC",DBConstants.DATA_BASE_USER, DBConstants.DATA_BASE_PASSWORD);
     }
 
     public void closeConnection(Connection con){

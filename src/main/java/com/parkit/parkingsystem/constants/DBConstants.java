@@ -1,6 +1,10 @@
 package com.parkit.parkingsystem.constants;
 
 public class DBConstants {
+	
+	public static final String DATA_BASE_USER = "root";
+	public static final String DATA_BASE_PASSWORD = System.getenv("DATA_BASE_PASSWORD");
+	
 
     public static final String GET_NEXT_PARKING_SPOT = "select min(PARKING_NUMBER) from parking where AVAILABLE = true and TYPE = ?";
     public static final String UPDATE_PARKING_SPOT = "update parking set available = ? where PARKING_NUMBER = ?";
