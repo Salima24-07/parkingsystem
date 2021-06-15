@@ -14,7 +14,7 @@ public class FareCalculatorService {
     public FareCalculatorService() {
 	}
 	public void calculateFare(Ticket ticket){
-        if( (ticket.getOutTime() == null) || (ticket.getOutTime() < ticket.getInTime()) ){
+        if( (ticket.getOutTime() == null) || (ticket.getOutTime() <= ticket.getInTime()) ){
             throw new IllegalArgumentException("Out time provided is incorrect:"+ticket.getOutTime().toString());
         }
 
@@ -23,7 +23,9 @@ public class FareCalculatorService {
        
         //DONE: Some tests are failing here. Need to check if this logic is correct
         double duration = outHour - inHour;
-        double reduction = (this.ticket_dao.getNumberOccurence(ticket.getVehicleRegNumber())< 2) ? 1 : Fare.VEHICLE_REDUCTION;
+        double reduction = (this.ticket_dao
+				        		.getNumberOccurence(ticket.getVehicleRegNumber())< Fare.NUBER_REDUCTION_FREQUENCY)
+				        		                                                 ? 1 : Fare.VEHICLE_REDUCTION;
         
         if(duration > 0.5 ) {
 		        switch (ticket.getParkingSpot().getParkingType()){

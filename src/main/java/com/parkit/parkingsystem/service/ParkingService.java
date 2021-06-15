@@ -32,6 +32,10 @@ public class ParkingService {
             ParkingSpot parkingSpot = getNextParkingNumberIfAvailable();
             if(parkingSpot !=null && parkingSpot.getId() > 0){
                 String vehicleRegNumber = getVehichleRegNumber();
+                if((this.ticketDAO.getNumberOccurence(vehicleRegNumber) != 0)) {
+                	System.out
+                	.println("Welcome back! As a recurring user of our parking lot, you'll benefit from a 5% discount.");
+                }
                 parkingSpot.setAvailable(false);
                 parkingSpotDAO.updateParking(parkingSpot);//allot this parking space and mark it's availability as false
 
@@ -55,7 +59,7 @@ public class ParkingService {
     }
 
     private String getVehichleRegNumber() throws Exception {
-        System.out.println("Please type the vehicle registration number and press enter key");
+        System.out.println("Please type the vehicle registration number and press enter key");        
         return inputReaderUtil.readVehicleRegistrationNumber();
     }
 

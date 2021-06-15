@@ -49,7 +49,7 @@ public class TicketDAO {
             try (PreparedStatement ps = con.prepareStatement(DBConstants.GET_TICKET)) {
 				//ID, PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME)
 				ps.setString(1,vehicleRegNumber);
-				ResultSet rs = ps.executeQuery();
+				ResultSet rs = ps.executeQuery(); 
 				if(rs.next()){
 				    ticket = new Ticket();
 				    ParkingSpot parkingSpot = new ParkingSpot(rs.getInt(1), ParkingType.valueOf(rs.getString(6)),false);
@@ -58,7 +58,7 @@ public class TicketDAO {
 				    ticket.setVehicleRegNumber(vehicleRegNumber); ticket.setPrice(rs.getDouble(3));				    
 				    ticket.setInTime(rs.getTimestamp(4).getTime());
 				    ticket.setOutTime(rs.getTimestamp(5) == null ? null : rs.getTimestamp(5).getTime());
-					return ticket;
+					
 					
 				}
 				dataBaseConfig.closeResultSet(rs);
@@ -103,7 +103,6 @@ public class TicketDAO {
 				ResultSet rs = ps.executeQuery();
 				if(rs.next()){
 				   number_occurence = rs.getInt(1);
-				   System.out.println("DAO"+number_occurence);
 				}
 				dataBaseConfig.closeResultSet(rs);
 			}
